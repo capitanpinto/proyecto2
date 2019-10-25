@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'sessions/new'
-  get 'users/new'
   root 'static_pages#home'
   get  '/cyrwheel',    to: 'static_pages#cyrwheel'
   get  '/signup',  to: 'users#new'
