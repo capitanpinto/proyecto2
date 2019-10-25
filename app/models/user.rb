@@ -16,6 +16,10 @@ class User < ApplicationRecord
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+  
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
 
 
   # Returns a random token.
