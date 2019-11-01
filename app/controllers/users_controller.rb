@@ -4,9 +4,13 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+   if params[:content]
+     @microposts =@user.microposts.where('content', "#{params[:content]}")
+   else
+     @microposts = @user.microposts
+   end
   end
-
+  
   def index
     @users = User.all
   end
@@ -60,6 +64,10 @@ class UsersController < ApplicationController
     end
   
   private
+  
+    def micropost_params
+      params.require(:micropost).permit(:content, :user_id)
+    end
 
  def user_params
       params.require(:user).permit(:name, :email, :password,
